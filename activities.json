@@ -2,9 +2,9 @@
   "message": "Authorization Error",
   "errors": [
     {
-      "resource": "AccessToken",
-      "field": "activity:read_permission",
-      "code": "missing"
+      "resource": "Athlete",
+      "field": "access_token",
+      "code": "invalid"
     }
   ]
 }
