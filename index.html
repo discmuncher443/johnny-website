@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Strava Stats</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: auto; }
+        .activity { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; border-radius: 5px; }
+        .activity h3 { margin: 0 0 10px 0; color: #fc4c02; }
+        .map-container { height: 250px; width: 100%; margin-top: 15px; border-radius: 4px; z-index: 1; }
+    </style>
+</head>
+<body>
+
+    <h1>My Recent Strava Activities</h1>
+    <div id="strava-data">Loading activities...</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
