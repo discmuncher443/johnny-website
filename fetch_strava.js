@@ -22,7 +22,7 @@ async function getStravaData() {
         const accessToken = tokenData.access_token;
 
         // 2. Use the new access token to fetch your latest activities
-        const activitiesResponse = await fetch(`https://www.strava.com/api/v3/athlete/activities?per_page=5`, {
+        const activitiesResponse = await fetch(`https://www.strava.com/api/v3/athlete/activities?per_page=7`, {
             headers: { 'Authorization': `Bearer ${accessToken}` }
         });
         const activitiesData = await activitiesResponse.json();

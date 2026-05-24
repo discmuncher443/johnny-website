@@ -1,4 +1,3 @@
-// 1. Function to decode the Strava polyline into latitude/longitude points
 const decodePolyline = (str, precision = 5) => {
     let index = 0, lat = 0, lng = 0, coordinates = [], shift = 0, result = 0, byte = null, latitude_change, longitude_change, factor = Math.pow(10, precision);
     while (index < str.length) {
@@ -14,44 +13,104 @@ const decodePolyline = (str, precision = 5) => {
     return coordinates;
 };
 
-// 2. Main function to display activities and maps
+// Format seconds into a clean MM:SS format for pace
+const formatPace = (totalSeconds, totalMiles) => {
+    if (totalMiles === 0) return "0:00 /mi";
+    const paceInSeconds = totalSeconds / totalMiles;
+    const minutes = Math.floor(paceInSeconds / 60);
+    const seconds = Math.round(paceInSeconds % 60).toString().padStart(2, '0');
+    return `${minutes}:${seconds} /mi`;
+};
+
+// Format seconds into HH:MM format for total time
+const formatTime = (totalSeconds) => {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    if (hours > 0) {
+        return `${hours}h ${minutes}m`;
+    }
+    return `${minutes}m`;
+};
+
 const displayActivities = (activities) => {
     const container = document.getElementById('strava-data');
+    const dashboard = document.getElementById('stats-dashboard');
     container.innerHTML = ''; 
 
+    // --- 1. CALCULATE AGGREGATE STATS ---
+    let totalMiles = 0;
+    let totalSeconds = 0;
+    let maxDistance = 0;
+    let furthestActivity = "N/A";
+
+    activities.forEach(activity => {
+        const distanceInMiles = activity.distance * 0.000621371;
+        totalMiles += distanceInMiles;
+        totalSeconds += activity.moving_time;
+
+        if (distanceInMiles > maxDistance) {
+            maxDistance = distanceInMiles;
+            furthestActivity = activity.name;
+        }
+    });
+
+    // --- 2. POPULATE DASHBOARD ---
+    dashboard.innerHTML = `
+        <div class="stat-card">
+            <h4>Total Mileage</h4>
+            <div class="value">${totalMiles.toFixed(2)} mi</div>
+        </div>
+        <div class="stat-card">
+            <h4>Total Time</h4>
+            <div class="value">${formatTime(totalSeconds)}</div>
+        </div>
+        <div class="stat-card">
+            <h4>Avg Pace</h4>
+            <div class="value">${formatPace(totalSeconds, totalMiles)}</div>
+        </div>
+        <div class="stat-card">
+            <h4>Furthest Run</h4>
+            <div class="value" style="font-size: 1.2em; margin-top: 18px;">${furthestActivity} <br> <span style="font-size: 0.8em; color: #888;">(${maxDistance.toFixed(2)} mi)</span></div>
+        </div>
+    `;
+
+    // --- 3. RENDER ACTIVITY CARDS ---
     activities.forEach(activity => {
         const distanceInMiles = (activity.distance * 0.000621371).toFixed(2);
-        
-        // Create a unique ID for each map so Leaflet knows where to draw
+        const pace = formatPace(activity.moving_time, activity.distance * 0.000621371);
         const mapId = `map-${activity.id}`;
         
         const activityDiv = document.createElement('div');
         activityDiv.classList.add('activity');
         
-        // Add the basic text AND a div to hold the map
+        // Modern card layout for individual activities
         activityDiv.innerHTML = `
             <h3>${activity.name}</h3>
-            <p><strong>Distance:</strong> ${distanceInMiles} miles</p>
-            <p><strong>Pace:</strong> ${( (activity.moving_time / 60) / distanceInMiles ).toFixed(2)} min/mi</p>
+            <div class="activity-stats">
+                <span><strong>Distance:</strong> ${distanceInMiles} mi</span>
+                <span><strong>Pace:</strong> ${pace}</span>
+                <span><strong>Date:</strong> ${new Date(activity.start_date_local).toLocaleDateString()}</span>
+            </div>
             <div id="${mapId}" class="map-container"></div>
         `;
         
         container.appendChild(activityDiv);
 
-        // 3. Draw the map using Leaflet
+        // Draw Map
         if (activity.map && activity.map.summary_polyline) {
             const coordinates = decodePolyline(activity.map.summary_polyline);
-            const map = L.map(mapId);
+            const map = L.map(mapId, { scrollWheelZoom: false }); // Disabled scroll zoom so user can scroll down page easily
             
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; OpenStreetMap contributors'
+                attribution: '&copy; OpenStreetMap'
             }).addTo(map);
             
             const polyline = L.polyline(coordinates, { color: '#fc4c02', weight: 4 }).addTo(map);
             map.fitBounds(polyline.getBounds());
         } else {
-            document.getElementById(mapId).innerHTML = '<p><em>No GPS data for this activity.</em></p>';
+            document.getElementById(mapId).innerHTML = '<div style="padding: 20px; text-align: center; color: #888;"><em>No GPS data for this activity.</em></div>';
             document.getElementById(mapId).style.height = 'auto';
+            document.getElementById(mapId).style.border = 'none';
         }
     });
 };
@@ -59,16 +118,11 @@ const displayActivities = (activities) => {
 // 4. Fetch data from the local file generated by GitHub Actions
 fetch('activities.json')
 .then(response => {
-    if (!response.ok) {
-        throw new Error('Network response was not ok');
-    }
+    if (!response.ok) throw new Error('Network response was not ok');
     return response.json();
 })
-.then(data => {
-    // This is the function the script couldn't find earlier!
-    displayActivities(data);
-})
+.then(data => displayActivities(data))
 .catch(error => {
-    console.error('Error fetching Strava data:', error);
+    console.error('Error:', error);
     document.getElementById('strava-data').innerHTML = 'Failed to load activities.';
 });
