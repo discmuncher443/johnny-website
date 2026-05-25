@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Johnathan Sayle | Interactive Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="../stylesheets/resume.css">
+</head>
+
+<body>
+    <script src="../scripts/resume.js" defer></script>
+
+    <div id="welcome-modal">
+        <div class="modal-content">
+            <h2>Welcome to my Interactive Resume</h2>
+            <p>Don't just read the bullet points—click on any of the <span class="highlight no-op">highlighted text</span> to reveal behind-the-scenes insights, context, and the engineering decisions behind my experience.</p>
+            <button class="start-btn" onclick="closeWelcomeModal()">Take the Tour</button>
+        </div>
+    </div>
+
+    <div class="resume-container" id="resume">
+        <a href="index.html" class="home-btn">← Back to Home</a>
+        <h1>Johnathan Sayle</h1>
+        <div class="contact-info">
+            20saylej@gmail.com | (440) 650-7117 | Columbus, OH |
+            <a href="https://www.linkedin.com/in/johnathan-sayle/" target="_blank">www.linkedin.com/in/johnathan-sayle/</a>
+        </div>
+
+        <div class="section-title">Professional Experience</div>
+        <div class="entry">
+            <div class="entry-header">
+                <span>Fullstack Developer</span>
+                <span>June 2024 – Present</span>
+            </div>
+            <div class="entry-sub">Impact.com | Columbus, OH</div>
+            <ul>
+                <li>Engineer and maintain backend services for a <span class="highlight" data-title="Scale & Performance" data-text="Designing for this volume means constantly thinking about Big O notation, database indexing, and network latency to keep the system highly responsive.">high-traffic application processing millions of interactions per day</span>.</li>
+                <li>Specialize in <span class="highlight" data-title="Root Cause Analysis" data-text="I excel at diving into undocumented legacy code, isolating the core issue, and implementing robust, scalable fixes rather than temporary patches.">debugging complex business logic issues</span> and resolving deep-seated system bottlenecks to ensure high availability.</li>
+                <li>Develop and optimize performant REST endpoints and database structures, focusing on design efficiency and low-latency execution.</li>
+                <li>Navigate a diverse codebase to resolve frontend webpage issues and cross-stack integration challenges.</li>
+                <li>Assisting with <span class="highlight" data-title="Under Pressure" data-text="My background as a D1 athlete taught me how to stay calm, focused, and systematic when the stakes are high and the system is down.">high-priority on-call support</span>, leading the rapid resolution of time-sensitive production incidents.</li>
+                <li>Collaborating with Project Managers and stakeholders to define technical scope, translating complex business requirements into actionable tickets.</li>
+            </ul>
+        </div>
+
+        <div class="section-title">Technical Skills</div>
+        <div class="skills-list">
+            <strong>Languages:</strong> Java (Spring, Hibernate), SQL (MySQL), Javascript (Vue, Ractive, React), some C++ and PHP<br><br>
+            <strong>Tools & Infrastructure:</strong> Kafka, Docker, Podman, Linux (Bash + Zsh), Jenkins, Nexus, Git, Jira, Copilot, Gemini CLI<br><br>
+            <strong>Specializations:</strong> <span class="highlight" data-title="Core Competency" data-text="I leverage the Spring ecosystem to build modular, testable, and highly concurrent enterprise applications.">Backend Development (Java)</span>, RESTful API Design, System Debugging
+        </div>
+
+        <div class="section-title">Education</div>
+        <div class="entry">
+            <div class="entry-header">
+                <span>Miami University</span>
+                <span>May 2024</span>
+            </div>
+            <div class="entry-sub">Bachelor of Science in Engineering, Computer Science | GPA: 3.9 | Oxford, OH</div>
+            <div class="coursework">
+                <strong>Coursework:</strong> Data Structures and Abstractions, Object Oriented Programming, Operating Systems, Software Engineering, Algorithms, Web Application Programming, Network Security, <span class="highlight" data-title="Advanced Concepts" data-text="These courses pushed my boundaries beyond standard CRUD apps, giving me a solid theoretical foundation in complex algorithmic problem-solving.">Quantum Computing, Advanced Databases, Artificial Intelligence, High Performance Computing</span>.
+            </div>
+            <ul>
+                <li><strong>Honors:</strong> President’s List Scholar: Spring 21-22 | Dean’s list scholar: Fall 20-21, Spring 20-21, Fall 21-22, Fall 22-23, Spring 22-23</li>
+                <li><strong>Thematic Sequence in Basic Mathematical Tools for Science:</strong> Discrete Mathematics, Calculus I, II, III, Linear Algebra, Statistics</li>
+                <li><span class="highlight" data-title="Endurance & Discipline" data-text="Balancing 20+ hours of weekly training, traveling, and competing with a 3.9 GPA in Computer Science required extreme time management and unwavering dedication.">NCAA D1 Athlete (Cross country, Indoor + Outdoor Track & Field)</span></li>
+            </ul>
+        </div>
+
+        <div class="section-title">Projects</div>
+        <div class="entry">
+            <div class="entry-header">
+                <span>Dynamic Internationalization (i18n) Engine</span>
+                <span>Impact.com</span>
+            </div>
+            <div class="entry-sub">Java, Spring</div>
+            <ul>
+                <li>Implemented a scalable localization system to replace high-latency external translation APIs with a high-performance, key-based message resolution strategy.</li>
+                <li>Decoupled UI components from hardcoded strings by utilizing a centralized message repository, enabling seamless language switching and support for international markets.</li>
+                <li><span class="highlight" data-title="Graceful Degradation" data-text="Ensures the UI never breaks for the user, maintaining a seamless experience even if our primary localization cache misses or an API fails.">Fallback mechanism that dynamically invokes translation APIs</span> only when localized key-value pairs are absent.</li>
+                <li>Content management workflow (Crowdin) allows for non-technical stakeholders to update the key-value mapping system rapidly without major code deployments.</li>
+            </ul>
+        </div>
+
+        <div class="entry">
+            <div class="entry-header">
+                <span>flyingdutchmanathletics.com</span>
+                <span>Freetime</span>
+            </div>
+            <div class="entry-sub">HTML, CSS, Javascript</div>
+            <ul>
+                <li>Built and deployed a custom, responsive website using HTML5, CSS3, and JavaScript, hosted via GitHub Pages to provide a professional digital presence for my running group.</li>
+                <li><span class="highlight" data-title="Soft Skills in Action" data-text="Writing code is only half the job. Gathering requirements, managing scope creep, and delivering what the client actually needs is just as crucial.">Simulated a professional Developer-Stakeholder lifecycle</span> by managing iterative updates and scope changes based on coach feedback.</li>
+                <li>Optimized UI/UX for mobile and desktop users, focusing on conversion-driven design for coaching inquiries and plan sign-ups.</li>
+            </ul>
+        </div>
+
+        <div class="entry">
+            <div class="entry-header">
+                <span>Object Detection and Optimization</span>
+                <span>Miami University</span>
+            </div>
+            <div class="entry-sub">C++ (OPENMP)</div>
+            <ul>
+                <li>Solo project, detecting objects within an image. Later iterations for improvements on algorithm for <span class="highlight" data-title="Performance Optimization" data-text="Leveraging OpenMP allowed me to manually optimize CPU core utilization, drastically reducing image processing times.">developer driven multi-threading and parallel processing</span>.</li>
+            </ul>
+        </div>
+
+        <div class="section-title">References</div>
+        <div class="skills-list" style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+            <div>
+                <strong>Mike Stahr</strong><br>
+                Former Professor of Miami University<br>
+                <a href="mailto:mikestahr@gmail.com" style="color: inherit; text-decoration: none;">mikestahr@gmail.com</a>
+            </div>
+            <div>
+                <strong>Desean Turner</strong><br>
+                Miami Cross Country Coach<br>
+                <a href="mailto:turner79@miamioh.edu" style="color: inherit; text-decoration: none;">turner79@miamioh.edu</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="comment-overlay">
+        <span class="comment-header" id="overlay-title"></span>
+        <div class="comment-body" id="overlay-body"></div>
+        <div class="timer-track">
+            <div class="timer-fill" id="timer"></div>
+        </div>
+        <div class="close-hint">Click anywhere to dismiss</div>
+    </div>
+</body>
+
+</html>

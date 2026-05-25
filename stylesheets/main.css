@@ -227,3 +227,19 @@ section h3 {
         transform: translateY(0);
     }
 }
+
+/* Styling for the hidden link inside the code editor */
+.code-link {
+    color: #fc4c02; /* Strava orange to make it pop against the green code */
+    text-decoration: none;
+    border-bottom: 1px dashed #fc4c02;
+    transition: color 0.2s ease, border-bottom-color 0.2s ease;
+    cursor: pointer;
+    position: relative;
+    z-index: 10; /* Ensures it can be clicked above the text */
+}
+
+.code-link:hover {
+    color: #ffffff;
+    border-bottom-color: #ffffff;
+}

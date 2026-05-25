@@ -1,4 +1,3 @@
-// The Java code block that will be typed out
 const codeSnippet = `class SoftwareEngineer {
     String name = "Johnathan Sayle";
     String location = "Columbus, OH";
@@ -7,7 +6,7 @@ const codeSnippet = `class SoftwareEngineer {
     void executeDailyRoutine() {
         writeCode("Java", "Spring Boot", "Vue");
         crushLongRun(10, "miles");
-        haveFun();
+        print("Checkout my Interactive Resume");
     }
 }`;
 
@@ -16,19 +15,21 @@ let index = 0;
 
 function typeCode() {
     if (index < codeSnippet.length) {
-        // Add the next character
+        // Type the next character
         typedTextElement.textContent += codeSnippet.charAt(index);
         index++;
-
-        // Add a slightly randomized delay to make it look like human typing
-        var randomDelay = Math.random() * 50 + 20; // Between 20ms and 70ms per keystroke
-        const longerRandomDelay = Math.random() * 20;
-        if (Math.floor(longerRandomDelay) == 13) {
-            randomDelay *= (Math.random() * 5 + 1);
-        }
+        
+        // Random delay for human-like typing
+        const randomDelay = Math.random() * 50 + 20;
         setTimeout(typeCode, randomDelay);
+    } else {
+        // 🎯 TYPING FINISHED: Swap the plain text for a clickable HTML link!
+        typedTextElement.innerHTML = typedTextElement.innerHTML.replace(
+            'Checkout my Interactive Resume',
+            '<a href="pages/resume.html" class="code-link">Checkout my Interactive Resume</a>'
+        );
     }
 }
 
-// Start typing after a short 1-second delay so the user has time to notice it
+// Start typing after a 1-second delay
 setTimeout(typeCode, 1000);
