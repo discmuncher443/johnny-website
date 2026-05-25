@@ -20,20 +20,36 @@ async function getStravaData() {
         });
         const tokenData = await tokenResponse.json();
         const accessToken = tokenData.access_token;
+const accessToken = tokenData.access_token;
 
-        // 2. Use the new access token to fetch your latest activities
-        const activitiesResponse = await fetch(`https://www.strava.com/api/v3/athlete/activities?per_page=7`, {
+        // NEW: Calculate the timestamp for exactly 7 days ago (in seconds)
+        const sevenDaysAgo = Math.floor(Date.now() / 1000) - (7 * 24 * 60 * 60);
+
+        // 2. Fetch activities using the 'after' parameter (grabbing up to 100 just in case you had a crazy week!)
+        const activitiesResponse = await fetch(`https://www.strava.com/api/v3/athlete/activities?after=${sevenDaysAgo}&per_page=100`, {
             headers: { 'Authorization': `Bearer ${accessToken}` }
         });
+        
         const activitiesData = await activitiesResponse.json();
 
-        // 3. Save the data to a static JSON file
-        fs.writeFileSync('activities.json', JSON.stringify(activitiesData, null, 2));
-        console.log('Successfully saved activities.json');
+        if (!activitiesResponse.ok) {
+            console.error('🚨 Failed to fetch activities. Strava responded with:', activitiesData);
+            process.exit(1); 
+        }
+
+        // NEW: Wrap the data in an object that includes the current time
+        const finalOutput = {
+            lastUpdated: new Date().toISOString(),
+            activities: activitiesData
+        };
+
+        // 3. Save the structured data to a static JSON file
+        fs.writeFileSync('activities.json', JSON.stringify(finalOutput, null, 2));
+        console.log('✅ Successfully saved activities.json');
 
     } catch (error) {
-        console.error('Error fetching Strava data:', error);
-        process.exit(1); // Fail the GitHub Action if something goes wrong
+        console.error('🚨 Script crashed:', error);
+        process.exit(1); 
     }
 }
 

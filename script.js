@@ -121,7 +121,14 @@ fetch('activities.json')
     if (!response.ok) throw new Error('Network response was not ok');
     return response.json();
 })
-.then(data => displayActivities(data))
+.then(data => {
+    // 1. Display the Last Updated timestamp
+    const updateTime = new Date(data.lastUpdated);
+    document.getElementById('last-updated').innerText = `Data last updated: ${updateTime.toLocaleString()}`;
+    
+    // 2. Pass the activities array into your rendering function
+    displayActivities(data.activities);
+})
 .catch(error => {
     console.error('Error:', error);
     document.getElementById('strava-data').innerHTML = 'Failed to load activities.';
