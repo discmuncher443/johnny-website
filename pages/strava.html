@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Strava Dashboard</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="../stylesheets/strava.css"/>
+</head>
+<body>
+
+    <button id="theme-toggle" class="theme-toggle">🌙 Dark Mode</button>
+
+    <h1>My Strava Dashboard</h1>
+    <p id="last-updated" style="text-align: center; color: #888; margin-top: -20px; margin-bottom: 30px; font-size: 0.9em;"></p>
+    
+    <div id="stats-dashboard" class="dashboard"></div>
+    <div id="strava-data" class="activity-grid">Loading recent activities...</div>
+
+    <div id="activity-modal" class="modal-backdrop">
+        <div class="modal-content">
+            <button id="close-modal">&times;</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="../scripts/strava.js"></script>
+</body>
+</html>

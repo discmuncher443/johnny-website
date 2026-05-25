@@ -3,30 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Strava Dashboard</title>
+    <title>Johnathan Sayle | Software Engineer</title>
     
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-    <link type="text/css" rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="stylesheets/main.css">
 </head>
 <body>
 
-    <button id="theme-toggle" class="theme-toggle">🌙 Dark Mode</button>
+    <div class="container">
+        
+        <header>
+            <h1>Johnathan Sayle</h1>
+            <p class="subtitle">Fullstack Developer | Former NCAA D1 Athlete</p>
+            <div class="contact-links">
+                <a href="https://www.linkedin.com/in/johnathan-sayle/" target="_blank">LinkedIn</a>
+                <a href="mailto:20saylej@gmail.com">Email Me</a>
+            </div>
+        </header>
 
-    <h1>My Strava Dashboard</h1>
-    <p id="last-updated" style="text-align: center; color: #888; margin-top: -20px; margin-bottom: 30px; font-size: 0.9em;"></p>
-    
-    <div id="stats-dashboard" class="dashboard"></div>
-    <div id="strava-data" class="activity-grid">Loading recent activities...</div>
+        <div class="code-editor">
+            <div class="editor-header">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+            </div>
+            <div class="editor-body"><span id="typed-code"></span><span class="cursor"></span></div>
+        </div>
 
-    <div id="activity-modal" class="modal-backdrop">
-        <div class="modal-content">
-            <button id="close-modal">&times;</button>
-            <div id="modal-body"></div>
+        <a href="strava.html" class="strava-widget">
+            <div>
+                <h2>Live Training Dashboard</h2>
+                <p>I built a custom integration with the Strava Developer API to track my recent mileage, pace, and GPS routes. Click to view the live data.</p>
+            </div>
+            <div class="arrow">→</div>
+        </a>
+
+        <div class="grid-layout">
+            <section>
+                <h3>About Me</h3>
+                <p>I am a software engineer based in Columbus, OH, currently working as a Fullstack Developer at <strong>Impact.com</strong>. I specialize in engineering backend services (Java/Spring) for high-traffic applications that process millions of interactions daily.</p>
+                <p>I love digging into complex business logic, optimizing database structures, and resolving deep-seated system bottlenecks. Before I was writing RESTful APIs and managing Docker containers, I studied Computer Science at Miami University while competing as a Division 1 athlete in Cross Country and Track & Field.</p>
+
+                <h3 style="margin-top: 40px;">Recent Projects</h3>
+                <p><strong>Dynamic i18n Engine:</strong> Engineered a scalable localization system in Java/Spring to replace high-latency external APIs with a high-performance, key-based message resolution strategy.</p>
+                <p><strong>Flying Dutchman Athletics:</strong> Built and deployed a custom, responsive web platform for a local running group to manage coaching inquiries and training plan sign-ups.</p>
+            </section>
+
+            <section>
+                <h3>Tech Stack</h3>
+                <div class="skills-container">
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">Spring Boot</span>
+                    <span class="skill-tag">Hibernate</span>
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Vue / React</span>
+                    <span class="skill-tag">Kafka</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Linux / Bash</span>
+                    <span class="skill-tag">C++</span>
+                </div>
+            </section>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="scripts/main.js"></script>
 </body>
 </html>

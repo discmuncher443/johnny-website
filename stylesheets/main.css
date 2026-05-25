@@ -1,0 +1,229 @@
+/* Modern Reset and Base Variables */
+:root {
+    --bg-color: #f4f7f6;
+    --text-main: #222;
+    --text-muted: #666;
+    --accent: #fc4c02;
+    --card-bg: #ffffff;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    padding: 60px 20px;
+}
+
+/* Hero Section */
+header {
+    margin-bottom: 40px;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+h1 {
+    font-size: 3em;
+    margin: 0 0 10px 0;
+    letter-spacing: -1px;
+}
+
+.subtitle {
+    font-size: 1.2em;
+    color: var(--text-muted);
+    margin: 0;
+    font-weight: 500;
+}
+
+.contact-links {
+    margin-top: 15px;
+    display: flex;
+    gap: 15px;
+}
+
+.contact-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: bold;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.contact-links a:hover {
+    border-bottom: 2px solid var(--accent);
+}
+
+/* Code Editor Styles */
+.code-editor {
+    background: #1e1e1e;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin-bottom: 40px;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.editor-header {
+    background: #2d2d2d;
+    padding: 12px 15px;
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot.red {
+    background: #ff5f56;
+}
+
+.dot.yellow {
+    background: #ffbd2e;
+}
+
+.dot.green {
+    background: #27c93f;
+}
+
+.editor-body {
+    padding: 20px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.95em;
+    color: #a6e22e;
+    overflow-x: auto;
+    white-space: pre;
+    min-height: 200px;
+}
+
+/* Blinking Cursor */
+.cursor {
+    display: inline-block;
+    width: 8px;
+    height: 1.2em;
+    background-color: #a6e22e;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* The Strava CTA Widget */
+.strava-widget {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    margin-bottom: 50px;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: inherit;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 6px solid var(--accent);
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.strava-widget:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(252, 76, 2, 0.15);
+}
+
+.strava-widget h2 {
+    margin: 0 0 5px 0;
+    color: var(--accent);
+}
+
+.strava-widget p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.95em;
+}
+
+.strava-widget .arrow {
+    font-size: 1.5em;
+    color: var(--accent);
+    font-weight: bold;
+    transition: transform 0.2s ease;
+}
+
+.strava-widget:hover .arrow {
+    transform: translateX(5px);
+}
+
+/* Grid Sections for Bio & Skills */
+.grid-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+@media (max-width: 600px) {
+    .grid-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+section h3 {
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+}
+
+/* Skills Tags */
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill-tag {
+    background: #e9ecef;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: #444;
+}
+
+/* Entrance Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
