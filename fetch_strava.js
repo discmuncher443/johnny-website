@@ -20,21 +20,30 @@ async function getStravaData() {
         });
         const tokenData = await tokenResponse.json();
         const accessToken = tokenData.access_token;
-const accessToken = tokenData.access_token;
 
-        // NEW: Calculate the timestamp for exactly 7 days ago (in seconds)
-        const sevenDaysAgo = Math.floor(Date.now() / 1000) - (7 * 24 * 60 * 60);
+        // NEW: Get the current date locked to US Eastern Time
+        const easternTimeStr = new Date().toLocaleString("en-US", { timeZone: "America/New_York" });
+        const targetDate = new Date(easternTimeStr);
 
-        // 2. Fetch activities using the 'after' parameter (grabbing up to 100 just in case you had a crazy week!)
-        const activitiesResponse = await fetch(`https://www.strava.com/api/v3/athlete/activities?after=${sevenDaysAgo}&per_page=100`, {
+        // Go back 6 days to create a 7-day window (e.g., Monday back to Tuesday)
+        targetDate.setDate(targetDate.getDate() - 6);
+
+        // Set the time to exactly 12:00:00 AM local time
+        targetDate.setHours(0, 0, 0, 0);
+
+        // Convert to Unix Epoch Timestamp (in seconds) for Strava
+        const startOfWindow = Math.floor(targetDate.getTime() / 1000);
+
+        // 2. Fetch activities using our new precise 'startOfWindow' timestamp
+        const activitiesResponse = await fetch(`https://www.strava.com/api/v3/athlete/activities?after=${startOfWindow}&per_page=100`, {
             headers: { 'Authorization': `Bearer ${accessToken}` }
         });
-        
+
         const activitiesData = await activitiesResponse.json();
 
         if (!activitiesResponse.ok) {
             console.error('🚨 Failed to fetch activities. Strava responded with:', activitiesData);
-            process.exit(1); 
+            process.exit(1);
         }
 
         // NEW: Wrap the data in an object that includes the current time
@@ -49,7 +58,7 @@ const accessToken = tokenData.access_token;
 
     } catch (error) {
         console.error('🚨 Script crashed:', error);
-        process.exit(1); 
+        process.exit(1);
     }
 }
 
