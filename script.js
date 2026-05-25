@@ -13,7 +13,6 @@ const decodePolyline = (str, precision = 5) => {
     return coordinates;
 };
 
-// Format seconds into a clean MM:SS format for pace
 const formatPace = (totalSeconds, totalMiles) => {
     if (totalMiles === 0) return "0:00 /mi";
     const paceInSeconds = totalSeconds / totalMiles;
@@ -22,59 +21,106 @@ const formatPace = (totalSeconds, totalMiles) => {
     return `${minutes}:${seconds} /mi`;
 };
 
-// Format seconds into HH:MM format for total time
 const formatTime = (totalSeconds) => {
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
-    if (hours > 0) {
-        return `${hours}h ${minutes}m`;
-    }
-    return `${minutes}m`;
+    return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
 };
+
+// Global variable to keep track of the modal's map so we can destroy/recreate it
+let modalMapInstance = null; 
+
+const openModal = (activity) => {
+    const modal = document.getElementById('activity-modal');
+    const modalBody = document.getElementById('modal-body');
+    
+    // Formatting the new data
+    const distanceMiles = (activity.distance * 0.000621371).toFixed(2);
+    const pace = formatPace(activity.moving_time, activity.distance * 0.000621371);
+    const elevationFeet = (activity.total_elevation_gain * 3.28084).toFixed(0); // Convert meters to feet
+    const hr = activity.has_heartrate ? Math.round(activity.average_heartrate) + ' bpm' : 'N/A';
+    const device = activity.device_name || 'N/A';
+    const kudos = activity.kudos_count || 0;
+    
+    // Inject the content into the modal
+    modalBody.innerHTML = `
+        <h2 style="color: #fc4c02; margin-top: 0; font-size: 2em;">${activity.name}</h2>
+        <p style="color: #888; margin-top: -15px; margin-bottom: 25px;">${new Date(activity.start_date_local).toLocaleString()}</p>
+        
+        <div class="modal-stats-grid">
+            <div class="modal-stat"><h4>Distance</h4><div class="val">${distanceMiles} mi</div></div>
+            <div class="modal-stat"><h4>Pace</h4><div class="val">${pace}</div></div>
+            <div class="modal-stat"><h4>Elevation</h4><div class="val">${elevationFeet} ft</div></div>
+            <div class="modal-stat"><h4>Heart Rate</h4><div class="val">${hr}</div></div>
+            <div class="modal-stat"><h4>Kudos</h4><div class="val">${kudos} 👏</div></div>
+            <div class="modal-stat"><h4>Device</h4><div class="val" style="font-size: 0.9em; line-height: 1.2; margin-top: 5px;">${device}</div></div>
+        </div>
+        
+        <div id="modal-map" class="modal-map"></div>
+    `;
+    
+    // Trigger the CSS animation to show the modal
+    modal.classList.add('show');
+    
+    // Destroy the old map if it exists, Leaflet breaks if you initialize over an old map
+    if (modalMapInstance) { modalMapInstance.remove(); }
+    
+    // Draw the new map inside the modal
+    if (activity.map && activity.map.summary_polyline) {
+        const coordinates = decodePolyline(activity.map.summary_polyline);
+        modalMapInstance = L.map('modal-map');
+        
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap'
+        }).addTo(modalMapInstance);
+        
+        const polyline = L.polyline(coordinates, { color: '#fc4c02', weight: 5 }).addTo(modalMapInstance);
+        
+        // CRITICAL FIX: Wait for the CSS transition to finish (300ms) before telling Leaflet to calculate its size!
+        setTimeout(() => {
+            modalMapInstance.invalidateSize();
+            modalMapInstance.fitBounds(polyline.getBounds());
+        }, 300);
+    } else {
+        document.getElementById('modal-map').innerHTML = '<div style="padding: 40px; text-align: center; color: #888;"><em>No GPS data for this activity.</em></div>';
+    }
+};
+
+// Close modal logic
+document.getElementById('close-modal').addEventListener('click', () => {
+    document.getElementById('activity-modal').classList.remove('show');
+});
+document.getElementById('activity-modal').addEventListener('click', (e) => {
+    // Only close if they click the blurred background, not the white card itself
+    if (e.target.id === 'activity-modal') {
+        document.getElementById('activity-modal').classList.remove('show');
+    }
+});
 
 const displayActivities = (activities) => {
     const container = document.getElementById('strava-data');
     const dashboard = document.getElementById('stats-dashboard');
     container.innerHTML = ''; 
 
-    // --- 1. CALCULATE AGGREGATE STATS ---
-    let totalMiles = 0;
-    let totalSeconds = 0;
-    let maxDistance = 0;
-    let furthestActivity = "N/A";
+    let totalMiles = 0, totalSeconds = 0, maxDistance = 0, furthestActivity = "N/A";
 
     activities.forEach(activity => {
         const distanceInMiles = activity.distance * 0.000621371;
         totalMiles += distanceInMiles;
         totalSeconds += activity.moving_time;
-
         if (distanceInMiles > maxDistance) {
             maxDistance = distanceInMiles;
             furthestActivity = activity.name;
         }
     });
 
-    // --- 2. POPULATE DASHBOARD ---
     dashboard.innerHTML = `
-        <div class="stat-card">
-            <h4>Total Mileage</h4>
-            <div class="value">${totalMiles.toFixed(2)} mi</div>
-        </div>
-        <div class="stat-card">
-            <h4>Total Time</h4>
-            <div class="value">${formatTime(totalSeconds)}</div>
-        </div>
-        <div class="stat-card">
-            <h4>Avg Pace</h4>
-            <div class="value">${formatPace(totalSeconds, totalMiles)}</div>
-        </div>
-        <div class="stat-card">
-            <h4>Furthest Run</h4>
-            <div class="value" style="font-size: 1.2em; margin-top: 18px;">${furthestActivity} <br> <span style="font-size: 0.8em; color: #888;">(${maxDistance.toFixed(2)} mi)</span></div>
-        </div>
+        <div class="stat-card"><h4>Total Mileage</h4><div class="val" style="font-size: 1.8em; font-weight: bold;">${totalMiles.toFixed(2)} mi</div></div>
+        <div class="stat-card"><h4>Total Time</h4><div class="val" style="font-size: 1.8em; font-weight: bold;">${formatTime(totalSeconds)}</div></div>
+        <div class="stat-card"><h4>Avg Pace</h4><div class="val" style="font-size: 1.8em; font-weight: bold;">${formatPace(totalSeconds, totalMiles)}</div></div>
+        <div class="stat-card"><h4>Furthest Run</h4><div class="val" style="font-size: 1.2em; font-weight: bold; margin-top: 15px;">${furthestActivity} <br> <span style="font-size: 0.8em; color: #888; font-weight: normal;">(${maxDistance.toFixed(2)} mi)</span></div></div>
     `;
 
-    // --- 3. RENDER ACTIVITY CARDS ---
     activities.forEach(activity => {
         const distanceInMiles = (activity.distance * 0.000621371).toFixed(2);
         const pace = formatPace(activity.moving_time, activity.distance * 0.000621371);
@@ -83,7 +129,9 @@ const displayActivities = (activities) => {
         const activityDiv = document.createElement('div');
         activityDiv.classList.add('activity');
         
-        // Modern card layout for individual activities
+        // NEW: Add click event to open the modal!
+        activityDiv.addEventListener('click', () => openModal(activity));
+        
         activityDiv.innerHTML = `
             <h3>${activity.name}</h3>
             <div class="activity-stats">
@@ -96,37 +144,25 @@ const displayActivities = (activities) => {
         
         container.appendChild(activityDiv);
 
-        // Draw Map
         if (activity.map && activity.map.summary_polyline) {
             const coordinates = decodePolyline(activity.map.summary_polyline);
-            const map = L.map(mapId, { scrollWheelZoom: false }); // Disabled scroll zoom so user can scroll down page easily
+            const map = L.map(mapId, { scrollWheelZoom: false, zoomControl: false, dragging: false }); // Locked down the mini-maps so they act like images
             
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; OpenStreetMap'
-            }).addTo(map);
-            
-            const polyline = L.polyline(coordinates, { color: '#fc4c02', weight: 4 }).addTo(map);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+            const polyline = L.polyline(coordinates, { color: '#fc4c02', weight: 3 }).addTo(map);
             map.fitBounds(polyline.getBounds());
-        } else {
-            document.getElementById(mapId).innerHTML = '<div style="padding: 20px; text-align: center; color: #888;"><em>No GPS data for this activity.</em></div>';
-            document.getElementById(mapId).style.height = 'auto';
-            document.getElementById(mapId).style.border = 'none';
         }
     });
 };
 
-// 4. Fetch data from the local file generated by GitHub Actions
 fetch('activities.json')
 .then(response => {
     if (!response.ok) throw new Error('Network response was not ok');
     return response.json();
 })
 .then(data => {
-    // 1. Display the Last Updated timestamp
     const updateTime = new Date(data.lastUpdated);
     document.getElementById('last-updated').innerText = `Data last updated: ${updateTime.toLocaleString()}`;
-    
-    // 2. Pass the activities array into your rendering function
     displayActivities(data.activities);
 })
 .catch(error => {
