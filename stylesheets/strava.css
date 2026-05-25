@@ -69,10 +69,19 @@ h1 {
     margin-top: 10px;
 }
 
+/* Activity Grid Layout */
 .activity-grid {
     display: grid;
     grid-template-columns: 1fr;
+    /* Default to 1 column for mobile */
     gap: 25px;
+}
+
+/* NEW: Snap to 2 columns on screens wider than 768px */
+@media (min-width: 768px) {
+    .activity-grid {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 .activity {
@@ -210,10 +219,22 @@ h1 {
     color: #222;
 }
 
+/* NEW: Make the modal body a flex container that fills the height */
+#modal-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+}
+
+/* Update your existing modal-map rule to grow automatically */
 .modal-map {
     flex-grow: 1;
+    /* This tells the map to eat up all remaining vertical space */
+    width: 100%;
+    min-height: 250px;
+    /* Prevents it from collapsing too small on tiny phones */
     border-radius: 12px;
-    min-height: 300px;
     z-index: 1;
     border: 1px solid #eee;
     transition: filter 0.3s ease;
