@@ -1,4 +1,4 @@
-/* Base Styles */
+/* Base Styles (Light Mode) */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: #f4f7f6;
@@ -7,12 +7,34 @@ body {
     max-width: 900px;
     margin: auto;
     line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1 {
     text-align: center;
     color: #fc4c02;
     margin-bottom: 30px;
+}
+
+/* Toggle Button */
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: 2px solid #fc4c02;
+    color: #fc4c02;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.theme-toggle:hover {
+    background: #fc4c02;
+    color: white;
 }
 
 /* Dashboard & Activity Grid */
@@ -29,6 +51,7 @@ h1 {
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     text-align: center;
+    transition: background-color 0.3s ease;
 }
 
 .stat-card h4 {
@@ -57,9 +80,8 @@ h1 {
     padding: 25px;
     border-radius: 16px;
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
     cursor: pointer;
-    /* Makes it obvious you can click it */
 }
 
 .activity:hover {
@@ -80,6 +102,7 @@ h1 {
     margin-bottom: 15px;
     font-size: 1.1em;
     pointer-events: none;
+    color: #333;
 }
 
 .map-container {
@@ -89,9 +112,10 @@ h1 {
     z-index: 1;
     border: 1px solid #eee;
     pointer-events: none;
+    transition: filter 0.3s ease;
 }
 
-/* NEW: Modal / Pop-out Styles */
+/* Modal Styles */
 .modal-backdrop {
     position: fixed;
     top: 0;
@@ -99,19 +123,15 @@ h1 {
     width: 100%;
     height: 100%;
     background: rgba(255, 255, 255, 0.5);
-    /* Semi-transparent white */
     backdrop-filter: blur(10px);
-    /* The "fuzzed out" effect */
     -webkit-backdrop-filter: blur(10px);
-    /* For Safari */
     z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0;
     pointer-events: none;
-    /* Hidden by default */
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, background 0.3s ease;
 }
 
 .modal-backdrop.show {
@@ -123,15 +143,12 @@ h1 {
     background: white;
     width: 90vw;
     height: 90vh;
-    /* Takes up almost whole screen */
     border-radius: 20px;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
     padding: 30px;
     position: relative;
     transform: scale(0.95);
-    /* Starts slightly small */
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    /* Bouncy seamless transition */
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
@@ -140,7 +157,6 @@ h1 {
 
 .modal-backdrop.show .modal-content {
     transform: scale(1);
-    /* Grows to full size */
 }
 
 #close-modal {
@@ -159,13 +175,13 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background-color 0.3s ease;
 }
 
 #close-modal:hover {
     background: #ddd;
 }
 
-/* Modal Internal Grid */
 .modal-stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -178,6 +194,7 @@ h1 {
     padding: 15px;
     border-radius: 10px;
     text-align: center;
+    transition: background-color 0.3s ease;
 }
 
 .modal-stat h4 {
@@ -199,4 +216,55 @@ h1 {
     min-height: 300px;
     z-index: 1;
     border: 1px solid #eee;
+    transition: filter 0.3s ease;
+}
+
+/* --- DARK MODE OVERRIDES --- */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-mode .stat-card,
+body.dark-mode .activity,
+body.dark-mode .modal-content {
+    background: #1e1e1e;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .modal-stat {
+    background: #2c2c2c;
+}
+
+body.dark-mode .stat-card .value,
+body.dark-mode .modal-stat .val,
+body.dark-mode .activity-stats {
+    color: #fff;
+}
+
+body.dark-mode .stat-card h4,
+body.dark-mode .modal-stat h4,
+body.dark-mode p#last-updated,
+body.dark-mode .modal-content p {
+    color: #aaa !important;
+}
+
+body.dark-mode .map-container,
+body.dark-mode .modal-map {
+    border-color: #333;
+    filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
+/* Turns the map dark! */
+body.dark-mode .modal-backdrop {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+body.dark-mode #close-modal {
+    background: #333;
+    color: #fff;
+}
+
+body.dark-mode #close-modal:hover {
+    background: #444;
 }

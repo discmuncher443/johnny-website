@@ -169,3 +169,27 @@ fetch('activities.json')
     console.error('Error:', error);
     document.getElementById('strava-data').innerHTML = 'Failed to load activities.';
 });
+
+// --- DARK MODE TOGGLE LOGIC ---
+const themeToggle = document.getElementById('theme-toggle');
+
+// 1. Check if the user previously chose dark mode and saved it in their browser
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+    themeToggle.innerText = '☀️ Light Mode';
+}
+
+// 2. Listen for clicks on the toggle button
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    
+    // Check if dark mode is now active
+    if (document.body.classList.contains('dark-mode')) {
+        themeToggle.innerText = '☀️ Light Mode';
+        localStorage.setItem('theme', 'dark'); // Save preference
+    } else {
+        themeToggle.innerText = '🌙 Dark Mode';
+        localStorage.setItem('theme', 'light'); // Save preference
+    }
+});
