@@ -3,10 +3,13 @@ const codeSnippet = `class SoftwareEngineer {
     String location = "Columbus, OH";
     String role = "Fullstack Developer";
 
+    String getInteractiveResume() {
+        return("Checkout my Interactive Resume");
+    }
+
     void executeDailyRoutine() {
         writeCode("Java", "Spring Boot", "Vue");
         crushLongRun(10, "miles");
-        print("Checkout my Interactive Resume");
     }
 }`;
 
