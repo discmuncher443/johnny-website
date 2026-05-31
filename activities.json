@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-05-31T13:08:29.125Z",
+  "lastUpdated": "2026-05-31T19:00:00.420Z",
   "activities": [
     {
       "resource_state": 2,
@@ -451,7 +451,7 @@
       "location_state": null,
       "location_country": null,
       "achievement_count": 0,
-      "kudos_count": 25,
+      "kudos_count": 26,
       "comment_count": 0,
       "athlete_count": 1,
       "photo_count": 0,
@@ -522,7 +522,7 @@
       "location_state": null,
       "location_country": null,
       "achievement_count": 1,
-      "kudos_count": 21,
+      "kudos_count": 22,
       "comment_count": 0,
       "athlete_count": 2,
       "photo_count": 0,
@@ -664,7 +664,7 @@
       "location_state": null,
       "location_country": null,
       "achievement_count": 0,
-      "kudos_count": 8,
+      "kudos_count": 13,
       "comment_count": 0,
       "athlete_count": 1,
       "photo_count": 0,
@@ -709,6 +709,68 @@
       "from_accepted_tag": false,
       "pr_count": 0,
       "total_photo_count": 0,
+      "has_kudoed": false
+    },
+    {
+      "resource_state": 2,
+      "athlete": {
+        "id": 57814033,
+        "resource_state": 1
+      },
+      "name": "Comin down the mountain",
+      "distance": 5758.3,
+      "moving_time": 2723,
+      "elapsed_time": 3289,
+      "total_elevation_gain": 4.2,
+      "type": "Walk",
+      "sport_type": "Walk",
+      "device_name": "Strava App",
+      "id": 18731453611,
+      "start_date": "2026-05-31T14:40:28Z",
+      "start_date_local": "2026-05-31T10:40:28Z",
+      "timezone": "(GMT-05:00) America/New_York",
+      "utc_offset": -14400,
+      "location_city": null,
+      "location_state": null,
+      "location_country": null,
+      "achievement_count": 0,
+      "kudos_count": 15,
+      "comment_count": 1,
+      "athlete_count": 1,
+      "photo_count": 0,
+      "map": {
+        "id": "a18731453611",
+        "summary_polyline": "i~k{Eb}hrNF@?FH]?KCHFUGIHECMIAJU@c@GAKJOQIFSKJGNWF?BST]BONEFQEIM@MGADG@_@OCECBVWAAPGFIAKFE?MFIBD@WRY?YHM?EHGACNK@IHM@M^ADRV?FDRON?BWBAAIJ@FECGNCBU?WCIDQCQJ_AKo@Q[CA@BEMLKEOFOD?DYHAVMBKn@k@BQNO?QLMOk@YSGM@MW_@OMC_@KAAGJC@QDI@DF_@B??UMG@MKE@[KW@EOACEBQIACKDEDQJK@MHAV]AOFa@S@SRDWFIDOFCASTSDIJGNUHCAOD??EMIKAKFIE?KPY?IEAKHMCQ`@OCMFIHALGK]AHWAMDOAa@HGDK?GQDILB@ASEB@ECMBIZO?IJCKIQ@MGGF_@QCFK@IGCIBQGBPQVg@@KCG[?KFUOW??S^O@GEG@KMEWHQGAGBGRCVSNCHDHCWIGOc@AQNQIMMBG^S@ICCQAWQILB?I@EEK@OFKXSFGR_@VM?@GCIBB?C]c@@i@JYAOLIDQ\\c@VOHQF@J[\\K@MV?BKQQo@GOMC@Z[FOOg@UEEKKIBCKSJi@XS?MMMG@EGMAIFQKULOIIBGM@MIQKAIFEWBGCCKB_@ZJF?HHAGv@IAMa@KC?EIHGICDKmAQc@@IW_ACMFOEIa@i@G?COI@KUUGGWWc@u@Ma@AoAkAEI?IGOFYISBWFEGOCAIFO@I?CGMGI@@Fk@?OMSCCE{Ae@G@OVYAKKOPO?GHAMQ_@IDGABBABKCOSEIFKGGIFGXGBEk@C@GWUKAWME@OCe@LSGKG@EPGAD]DIDo@RQCMSH[GWZENMJE^MGE@GNIISf@EU?CB?CE?GKQESEf@BTFPAPBHB^Ej@BZE^DLO\\AXGB?PYHKAII@k@EEAWDKAm@BYCEA}@G[?a@GWAs@Ea@He@N]@W@KDAFs@DI@SNWDSR}ALUB]Ro@@OFSDB?MPSLANBRJTAXFFHLS?ULm@^_@Jc@@c@DKA_@@QAMGQDEHmAFMGMDE?i@G_@FQEECSQYGkAOy@KgAAo@DKE]DI@i@HSNy@PUBMJETa@DWDEGE@OBCAKF[]JUNk@NKI]E]`@]POXANITKDU`@GP_@NITUCOTCNGFCLDPD^A^GH?b@ODO^[RKA@KCIA]QMG?AMI?yAsD_DfBF@R\\`AFRD?HDD\\[HC?FHKEKEc@IEOD[?SKKKMYASEIBKOGAIIIQGW[c@a@",
+        "resource_state": 2
+      },
+      "trainer": false,
+      "commute": false,
+      "manual": false,
+      "private": false,
+      "visibility": "everyone",
+      "flagged": false,
+      "gear_id": "g9627188",
+      "start_latlng": [
+        36.111257,
+        -81.807056
+      ],
+      "end_latlng": [
+        36.120232,
+        -81.781297
+      ],
+      "average_speed": 2.115,
+      "max_speed": 5.24,
+      "has_heartrate": false,
+      "heartrate_opt_out": false,
+      "display_hide_heartrate_option": false,
+      "elev_high": 1738,
+      "elev_low": 1188.6,
+      "upload_id": 19840664697,
+      "upload_id_str": "19840664697",
+      "external_id": "F05814DA-4A72-43BB-93CD-66FAAF158986-activity.fit",
+      "from_accepted_tag": false,
+      "pr_count": 0,
+      "total_photo_count": 1,
       "has_kudoed": false
     }
   ]
