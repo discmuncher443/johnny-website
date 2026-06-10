@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-10T09:37:41.610Z",
+  "lastUpdated": "2026-06-10T20:06:42.187Z",
   "activities": [
     {
       "resource_state": 2,
@@ -566,6 +566,77 @@
       "external_id": "478086251692457984.fit",
       "from_accepted_tag": false,
       "pr_count": 1,
+      "total_photo_count": 0,
+      "has_kudoed": false
+    },
+    {
+      "resource_state": 2,
+      "athlete": {
+        "id": 57814033,
+        "resource_state": 1
+      },
+      "name": "Afternoon Run",
+      "distance": 13014.9,
+      "moving_time": 3372,
+      "elapsed_time": 3418,
+      "total_elevation_gain": 54,
+      "type": "Run",
+      "sport_type": "Run",
+      "workout_type": null,
+      "device_name": "COROS PACE 3",
+      "id": 18869621886,
+      "start_date": "2026-06-10T17:56:57Z",
+      "start_date_local": "2026-06-10T13:56:57Z",
+      "timezone": "(GMT-05:00) America/New_York",
+      "utc_offset": -14400,
+      "location_city": null,
+      "location_state": null,
+      "location_country": null,
+      "achievement_count": 0,
+      "kudos_count": 0,
+      "comment_count": 0,
+      "athlete_count": 1,
+      "photo_count": 0,
+      "map": {
+        "id": "a18869621886",
+        "summary_polyline": "e}asFdn|yNDV@x@LjA@lAQxMDLTRpAn@f@NX@x@[dAWJ@XJHHFJ@P@b@QtHElAAjCIzD@\\DLJJLFxARZ@HB?f@Hx@Bd@AjBI|D?b@DPZl@ZtA\\h@N\\^fBFLJHL@\\EtDaAL@VLJ@LAhCw@dFiBxFaClEgBzAs@xAm@REPCJ@d@TL@LCpAe@JAJDDN@PL~BDNHHLBL?\\G`A[hCcA`@MLAnA?`ABbAA`@AfBQZ?nCRdBXzBHx@EtAUr@Up@]x@q@n@a@jBeBtDyD`AmAj@m@f@s@h@m@`@{@v@eAnBuBdAy@dB_BjBqBp@y@Xk@|@qC`@{BJ{@NkCNqA~AaJPgBRaB^eF`@yCJeAf@oIFkBZmCCu@ScAMgACkBK_@Wi@a@e@i@c@s@a@gAaA}@cAy@WQMq@o@KGIAM@KFy@v@gBlB_@j@CLDFJ?HI^m@VWb@a@p@e@`@a@To@v@mDXgAdCwEZeARoAX_DTkEb@gF\\mFFk@Rm@Fa@Cc@e@oFCJ@P^vFAPUp@Ib@[jEGhBWzCYpEG~AWfBa@bBUn@sBtDM\\sAzFSX}@n@{@z@SZWj@IBAGDMV]fDoDNOJEJ@TPd@p@VPlAh@VZl@h@p@r@d@VTRh@n@b@dAHb@?fAJ|APz@D`@Ad@ShBKjCOfB_@|CMfBa@bDG~@E~AOxAYxAYzBm@dCg@jDMzAUvECN[z@[vAs@lBSZk@l@sB|ByAvAcAv@kBpBu@z@o@dAs@z@]f@aA~@q@x@w@v@w@~@}DrDiBxAq@^mAX[D{@BeACgHi@aBD{CJqAAi@@[D[Hu@Z}@`@qATs@PMAKEGK[uCCOIIK?i@PK?c@Ok@CUDQH_Aj@mDtAyAt@mJvDeBj@mBr@yAb@}@TK?UOKCE?_Cl@g@HM?KEGMYsA_@]GM[qASk@MY]_@COA_@FwBDaDDoACi@M]IMKE{BMKCGIEO`@uR@oCCMIEM?_@JeA`@K?QGw@c@u@Ww@_@aAWcA_@oA]aAW{AY_A]GMAe@JsBH{EL_A",
+        "resource_state": 2
+      },
+      "trainer": false,
+      "commute": false,
+      "manual": false,
+      "private": false,
+      "visibility": "everyone",
+      "flagged": false,
+      "gear_id": "g9627188",
+      "start_latlng": [
+        39.992036,
+        -83.05395
+      ],
+      "end_latlng": [
+        39.993933,
+        -83.054532
+      ],
+      "average_speed": 3.86,
+      "max_speed": 5.6,
+      "average_cadence": 83.8,
+      "average_watts": 286.2,
+      "max_watts": 355,
+      "weighted_average_watts": 284,
+      "device_watts": true,
+      "kilojoules": 965.2,
+      "has_heartrate": true,
+      "average_heartrate": 134.5,
+      "max_heartrate": 155,
+      "heartrate_opt_out": false,
+      "display_hide_heartrate_option": true,
+      "elev_high": 255,
+      "elev_low": 221,
+      "upload_id": 19981360548,
+      "upload_id_str": "19981360548",
+      "external_id": "478115864407736422.fit",
+      "from_accepted_tag": false,
+      "pr_count": 0,
       "total_photo_count": 0,
       "has_kudoed": false
     }
