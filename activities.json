@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-22T20:30:16.029Z",
+  "lastUpdated": "2026-06-23T02:00:55.265Z",
   "activities": [
     {
       "resource_state": 2,
@@ -732,8 +732,8 @@
       "location_state": null,
       "location_country": null,
       "achievement_count": 0,
-      "kudos_count": 25,
-      "comment_count": 1,
+      "kudos_count": 26,
+      "comment_count": 2,
       "athlete_count": 1,
       "photo_count": 0,
       "map": {
