@@ -1,10 +1,11 @@
 {
-  "lastUpdated": "2026-06-24T14:01:56.878Z",
+  "lastUpdated": "2026-06-24T19:24:00.157Z",
   "activities": [
     {
       "resource_state": 2,
       "athlete": {
         "id": 57814033,
+        "id_str": "57814033",
         "resource_state": 1
       },
       "name": "Morning Run",
@@ -17,6 +18,7 @@
       "workout_type": null,
       "device_name": "COROS PACE 3",
       "id": 18971245331,
+      "id_str": "18971245331",
       "start_date": "2026-06-18T12:14:07Z",
       "start_date_local": "2026-06-18T08:14:07Z",
       "timezone": "(GMT-05:00) America/New_York",
@@ -76,6 +78,7 @@
       "resource_state": 2,
       "athlete": {
         "id": 57814033,
+        "id_str": "57814033",
         "resource_state": 1
       },
       "name": "Evening Run",
@@ -88,6 +91,7 @@
       "workout_type": null,
       "device_name": "COROS PACE 3",
       "id": 18978871615,
+      "id_str": "18978871615",
       "start_date": "2026-06-19T00:35:38Z",
       "start_date_local": "2026-06-18T20:35:38Z",
       "timezone": "(GMT-05:00) America/New_York",
@@ -147,6 +151,7 @@
       "resource_state": 2,
       "athlete": {
         "id": 57814033,
+        "id_str": "57814033",
         "resource_state": 1
       },
       "name": "Morning Run",
@@ -159,6 +164,7 @@
       "workout_type": null,
       "device_name": "COROS PACE 3",
       "id": 18985050322,
+      "id_str": "18985050322",
       "start_date": "2026-06-19T13:01:49Z",
       "start_date_local": "2026-06-19T09:01:49Z",
       "timezone": "(GMT-05:00) America/New_York",
@@ -218,6 +224,7 @@
       "resource_state": 2,
       "athlete": {
         "id": 57814033,
+        "id_str": "57814033",
         "resource_state": 1
       },
       "name": "Morning Run",
@@ -230,6 +237,7 @@
       "workout_type": null,
       "device_name": "COROS PACE 3",
       "id": 18996556985,
+      "id_str": "18996556985",
       "start_date": "2026-06-20T12:19:04Z",
       "start_date_local": "2026-06-20T08:19:04Z",
       "timezone": "(GMT-05:00) America/New_York",
@@ -289,6 +297,7 @@
       "resource_state": 2,
       "athlete": {
         "id": 57814033,
+        "id_str": "57814033",
         "resource_state": 1
       },
       "name": "Digital dash 🤖",
@@ -301,6 +310,7 @@
       "workout_type": null,
       "device_name": "COROS PACE 3",
       "id": 18997258447,
+      "id_str": "18997258447",
       "start_date": "2026-06-20T13:01:11Z",
       "start_date_local": "2026-06-20T09:01:11Z",
       "timezone": "(GMT-05:00) America/New_York",
@@ -360,6 +370,7 @@
       "resource_state": 2,
       "athlete": {
         "id": 57814033,
+        "id_str": "57814033",
         "resource_state": 1
       },
       "name": "Morning Run",
@@ -372,6 +383,7 @@
       "workout_type": null,
       "device_name": "COROS PACE 3",
       "id": 18998390291,
+      "id_str": "18998390291",
       "start_date": "2026-06-20T13:49:05Z",
       "start_date_local": "2026-06-20T09:49:05Z",
       "timezone": "(GMT-05:00) America/New_York",
@@ -431,6 +443,7 @@
       "resource_state": 2,
       "athlete": {
         "id": 57814033,
+        "id_str": "57814033",
         "resource_state": 1
       },
       "name": "Afternoon Mountain Bike Ride",
@@ -443,6 +456,7 @@
       "workout_type": null,
       "device_name": "COROS PACE 3",
       "id": 19002231407,
+      "id_str": "19002231407",
       "start_date": "2026-06-20T20:28:38Z",
       "start_date_local": "2026-06-20T16:28:38Z",
       "timezone": "(GMT-05:00) America/New_York",
@@ -499,6 +513,7 @@
       "resource_state": 2,
       "athlete": {
         "id": 57814033,
+        "id_str": "57814033",
         "resource_state": 1
       },
       "name": "Morning Run",
@@ -511,6 +526,7 @@
       "workout_type": null,
       "device_name": "COROS PACE 3",
       "id": 19012289670,
+      "id_str": "19012289670",
       "start_date": "2026-06-21T14:31:40Z",
       "start_date_local": "2026-06-21T10:31:40Z",
       "timezone": "(GMT-05:00) America/New_York",
