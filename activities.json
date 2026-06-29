@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-29T10:17:51.610Z",
+  "lastUpdated": "2026-06-29T15:25:42.226Z",
   "activities": [
     {
       "resource_state": 2,
@@ -464,7 +464,7 @@
       "location_city": null,
       "location_state": null,
       "location_country": null,
-      "achievement_count": 8,
+      "achievement_count": 11,
       "kudos_count": 29,
       "comment_count": 1,
       "athlete_count": 34,
@@ -508,7 +508,7 @@
       "upload_id_str": "20213196084",
       "external_id": "478526367451873486.fit",
       "from_accepted_tag": false,
-      "pr_count": 2,
+      "pr_count": 3,
       "total_photo_count": 0,
       "has_kudoed": false
     },
@@ -611,7 +611,7 @@
       "location_state": null,
       "location_country": null,
       "achievement_count": 1,
-      "kudos_count": 37,
+      "kudos_count": 39,
       "comment_count": 0,
       "athlete_count": 7,
       "photo_count": 0,
