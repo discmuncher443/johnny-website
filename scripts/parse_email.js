@@ -61,12 +61,12 @@ async function main() {
             let parsed = await simpleParser(message.source);
             let emailText = parsed.text || "";
             
-            if (!emailText.includes(`SECRET_TOKEN=${BLOG_SECRET}`)) {
+            if (!emailText.includes(`password=${BLOG_SECRET}`)) {
                 console.log(`Email UID ${uid} failed security validation. Skipping.`);
                 continue; 
             }
 
-            const cleanedText = emailText.replace(`SECRET_TOKEN=${BLOG_SECRET}`, '').trim();
+            const cleanedText = emailText.replace(`password=${BLOG_SECRET}`, '').trim();
             const post = parseEmailContent(parsed.subject, cleanedText, message.internalDate);
 
             if (post) {
