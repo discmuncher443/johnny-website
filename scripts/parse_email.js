@@ -30,13 +30,24 @@ async function main() {
     let lock = await client.getMailboxLock('INBOX');
 
     try {
-        let messages = await client.search({ seen: false });
+        // Calculate the date boundary for 2 days ago
+        const twoDaysAgo = new Date();
+        twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+        
+        console.log(`Filtering for unread emails since: ${twoDaysAgo.toDateString()}`);
+
+        // CRITICAL UPDATE: Narrow the query window on the IMAP server side
+        let messages = await client.search({ 
+            seen: false,
+            since: twoDaysAgo // Tells the server to completely ignore older mail
+        });
+        
         if (messages.length === 0) {
-            console.log("No new unread blog emails discovered.");
+            console.log("No new unread blog emails discovered in the last 2 days.");
             return;
         }
 
-        console.log(`Discovered ${messages.length} unread email(s). Processing...`);
+        console.log(`Discovered ${messages.length} recent unread email(s). Processing...`);
 
         let manifest = [];
         if (fs.existsSync(MANIFEST_PATH)) {
