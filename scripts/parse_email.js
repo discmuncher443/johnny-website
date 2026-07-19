@@ -36,10 +36,10 @@ async function main() {
         
         console.log(`Filtering for unread emails since: ${twoDaysAgo.toDateString()}`);
 
-        // CRITICAL UPDATE: Narrow the query window on the IMAP server side
+        // Narrow the query window on the IMAP server side
         let messages = await client.search({ 
             seen: false,
-            since: twoDaysAgo // Tells the server to completely ignore older mail
+            since: twoDaysAgo 
         });
         
         if (messages.length === 0) {
@@ -61,12 +61,16 @@ async function main() {
             let parsed = await simpleParser(message.source);
             let emailText = parsed.text || "";
             
-            if (!emailText.includes(`password=${BLOG_SECRET}`)) {
+            // Flexibly checks for "pass=" or "password=" ignoring spaces and carriage returns (\r)
+            const authRegex = new RegExp(`(?:password|pass)\\s*=\\s*${escapeRegExp(BLOG_SECRET)}`, 'i');
+            
+            if (!authRegex.test(emailText)) {
                 console.log(`Email UID ${uid} failed security validation. Skipping.`);
                 continue; 
             }
 
-            const cleanedText = emailText.replace(`password=${BLOG_SECRET}`, '').trim();
+            // Clean out the secret key line
+            const cleanedText = emailText.replace(authRegex, '').trim();
             const post = parseEmailContent(parsed.subject, cleanedText, message.internalDate);
 
             if (post) {
@@ -124,6 +128,11 @@ function parseEmailContent(subject, text, internalDate) {
         console.error("Critical error parsing email content structure:", err);
         return null;
     }
+}
+
+function escapeRegExp(string) {
+    if (!string) return '';
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 main().catch(err => {
