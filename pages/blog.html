@@ -1,0 +1,102 @@
+<div id="blog-posts">Loading latest entries...</div>
+
+<script>
+    async function loadBlog() {
+        const container = document.getElementById('blog-posts');
+        try {
+            // Step 1: Grab the manifest directory list
+            const manifestResponse = await fetch('./manifest.json');
+            if (!manifestResponse.ok) {
+                container.innerHTML = '<p>No posts written yet! Send an email to get started.</p>';
+                return;
+            }
+            const postFiles = await manifestResponse.json();
+
+            if (postFiles.length === 0) {
+                container.innerHTML = '<p>No posts written yet!</p>';
+                return;
+            }
+
+            // Step 2: Fetch the content for all posts concurrently
+            const postPromises = postFiles.map(async (filename) => {
+                const res = await fetch(`./posts/${filename}`);
+                if (res.ok) return res.json();
+                return null;
+            });
+
+            const posts = (await Promise.all(postPromises)).filter(p => p !== null);
+
+            // Step 3: Render to the DOM interface
+            container.innerHTML = posts.map(post => `
+                <article>
+                    <h2>${escapeHtml(post.title)}</h2>
+                    <div class="meta">
+                        Published on <strong>${post.date}</strong> 
+                        ${post.tags.length ? `• ${post.tags.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('')}` : ''}
+                    </div>
+                    <p><em>${escapeHtml(post.description)}</em></p>
+                    <div class="content">${escapeHtml(post.content)}</div>
+                </article>
+            `).join('');
+
+        } catch (err) {
+            container.innerHTML = `<p style="color:red;">Error loading feed: ${err.message}</p>`;
+        }
+    }
+
+    function escapeHtml(str) {
+        return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+
+    loadBlog();
+
+    async function loadBlog() {
+        const container = document.getElementById('blog-posts');
+        if (!container) return;
+
+        try {
+            // Climb out of /pages/ to find manifest.json in the root directory
+            const manifestResponse = await fetch('../manifest.json');
+            if (!manifestResponse.ok) {
+                container.innerHTML = '<p>No posts written yet! Send an email to get started.</p>';
+                return;
+            }
+            const postFiles = await manifestResponse.json();
+
+            if (postFiles.length === 0) {
+                container.innerHTML = '<p>No posts written yet!</p>';
+                return;
+            }
+
+            // Climb out of /pages/ to look up /blog_posts/ in the root directory
+            const postPromises = postFiles.map(async (filename) => {
+                const res = await fetch(`../blog_posts/${filename}`);
+                if (res.ok) return res.json();
+                return null;
+            });
+
+            const posts = (await Promise.all(postPromises)).filter(p => p !== null);
+
+            container.innerHTML = posts.map(post => `
+            <article class="blog-entry">
+                <h2>${escapeHtml(post.title)}</h2>
+                <div class="meta">
+                    Published on <strong>${post.date}</strong> 
+                    ${post.tags.length ? `• ${post.tags.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('')}` : ''}
+                </div>
+                <p class="description"><em>${escapeHtml(post.description)}</em></p>
+                <div class="content">${escapeHtml(post.content)}</div>
+            </article>
+        `).join('');
+
+        } catch (err) {
+            container.innerHTML = `<p style="color:red;">Error loading feed: ${err.message}</p>`;
+        }
+    }
+
+    function escapeHtml(str) {
+        return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+
+    document.addEventListener('DOMContentLoaded', loadBlog);
+</script>

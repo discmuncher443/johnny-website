@@ -1,0 +1,48 @@
+name: Fetch and Parse Email Blog Posts
+
+on:
+  schedule:
+    - cron: '0 * * * *' 
+  workflow_dispatch: 
+
+permissions:
+  contents: write 
+
+jobs:
+  sync-blog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code Base
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Libraries
+        run: npm ci
+
+      - name: Execute Parser Script
+        run: node scripts/parse_email.js
+        env:
+          IMAP_HOST: ${{ secrets.IMAP_HOST }}
+          IMAP_USER: ${{ secrets.IMAP_USER }}
+          IMAP_PASS: ${{ secrets.IMAP_PASS }}
+          BLOG_SECRET: ${{ secrets.BLOG_SECRET }}
+
+      - name: Check for Changes and Push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Target your precise directory structures
+          git add manifest.json blog_posts/
+          
+          if ! git diff --cached --quiet; then
+            git commit -m "Automated update: Added new standalone post via email entry"
+            git push
+          else
+            echo "No new modifications or items discovered."
+          fi

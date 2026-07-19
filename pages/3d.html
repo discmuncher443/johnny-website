@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGL Playground | Johnathan Sayle</title>
+    <style>
+        /* Reset margins to make the canvas take up the exact full screen */
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #121212;
+            font-family: sans-serif;
+        }
+
+        /* A simple back button to get back to your main site */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 8px;
+            z-index: 10;
+            transition: background 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(252, 76, 2, 0.8);
+        }
+
+        /* Strava Orange hover */
+    </style>
+</head>
+
+<body>
+
+    <a href="../index.html" class="back-btn">← Back to Home</a>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/controls/OrbitControls.js"></script>
+
+    <script src="../scripts/3d.js"></script>
+</body>
+
+</html>

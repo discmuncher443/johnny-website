@@ -1,0 +1,8 @@
+{
+  "name": "my-portfolio-site",
+  "version": "1.0.0",
+  "dependencies": {
+    "imapflow": "^1.0.15",
+    "mailparser": "^3.7.1"
+  }
+}
